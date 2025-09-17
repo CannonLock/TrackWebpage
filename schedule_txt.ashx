@@ -1,0 +1,1 @@
+Wisconsin Badgers2026 Football ScheduleDate   Time   At   Opponent   Location   Tournament   Result
