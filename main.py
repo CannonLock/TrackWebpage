@@ -21,6 +21,11 @@ else:
   for number in numbers:
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
-      'message': 'It changed, send the email',
+      'message': 'It changed, send the email. https://uwbadgers.com/services/schedule_txt.ashx?schedule=694',
+      'key': os.getenv('API_KEY')
+    })
+    resp = requests.post('https://textbelt.com/text', {
+      'phone': number,
+      'message': new_content,
       'key': os.getenv('API_KEY')
     })
