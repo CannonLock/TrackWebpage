@@ -19,11 +19,13 @@ else:
   print("Change detected, sending texts.")
   numbers = ['9205174889', '4143799373']
   for number in numbers:
+    print(f"Sending url to: {number}")
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
       'message': 'It changed, send the email. https://uwbadgers.com/services/schedule_txt.ashx?schedule=694',
       'key': os.getenv('API_KEY')
     })
+    print(f"Sending change to: {number}")
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
       'message': new_content,
