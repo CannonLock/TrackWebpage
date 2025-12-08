@@ -9,7 +9,12 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 }
 
-new_content = requests.get("https://uwbadgers.com/services/schedule_txt.ashx?schedule=694", headers=headers).text
+new_content_response = requests.get("https://uwbadgers.com/services/schedule_txt.ashx?schedule=694", headers=headers)
+
+if new_content_response.status_code != 200:
+    raise ValueError(f"Failed to fetch content, status code: {new_content_response.status_code}")
+
+new_content = new_content_response.text
 old_content = pickle.load(open('old_content.pkl', 'rb'))
 
 if new_content == old_content:
@@ -22,10 +27,9 @@ else:
     print(f"Sending url to: {number}")
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
-      'message': 'It changed, send the email. https://uwbadgers.com/services/schedule_txt.ashx?schedule=694',
+      'message': 'It changed, send the email.\n\n\t1. October 3rd\n\t2. September 26th\n\t3. October 17th\n\nEmail: nachtigall@wisc.edu',
       'key': os.getenv('API_KEY')
     })
-    print(f"Sending change to: {number}")
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
       'message': new_content,
