@@ -1,6 +1,7 @@
 import requests
 import os
 import pickle
+import time
 
 if os.getenv('API_KEY') is None:
   raise ValueError("No API key set for Textbelt. Please set the API_KEY environment variable.")
@@ -27,11 +28,14 @@ else:
     print(f"Sending url to: {number}")
     resp = requests.post('https://textbelt.com/text', {
       'phone': number,
-      'message': 'It changed, send the email.\n\n\t1. October 3rd\n\t2. September 26th\n\t3. October 17th\n\nEmail: nachtigall@wisc.edu',
-      'key': os.getenv('API_KEY')
-    })
-    resp = requests.post('https://textbelt.com/text', {
-      'phone': number,
       'message': new_content,
       'key': os.getenv('API_KEY')
     })
+    print(resp.json())
+    time.sleep(1)
+    resp = requests.post('https://textbelt.com/text', {
+      'phone': number,
+      'message': 'It changed, send the email.\n\n\t1. October 3rd\n\t2. September 26th\n\t3. October 17th\n\nEmail: nachtigall@wisc dot edu',
+      'key': os.getenv('API_KEY')
+    })
+    print(resp.json())
