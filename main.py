@@ -20,7 +20,7 @@ def main():
     new_content = new_content_response.text
     old_content = pickle.load(open('old_content.pkl', 'rb'))
 
-    if new_content != old_content:
+    if new_content == old_content:
         print("No change detected.")
 
     else:
@@ -35,12 +35,12 @@ def main():
         })
         print(resp.json())
         time.sleep(1)
-        # resp = requests.post('https://textbelt.com/text', {
-        #   'phone': number,
-        #   'message': 'It changed, send the email.\n\n\t1. October 3rd\n\t2. September 26th\n\t3. October 17th\n\nEmail: nachtigall@wisc dot edu',
-        #   'key': os.getenv('API_KEY')
-        # })
-        # print(resp.json())
+        resp = requests.post('https://textbelt.com/text', {
+          'phone': number,
+          'message': 'It changed, send the email.\n\n\t1. October 3rd\n\t2. September 26th\n\t3. October 17th\n\nEmail: nachtigall@wisc dot edu',
+          'key': os.getenv('API_KEY')
+        })
+        print(resp.json())
 
 if __name__ == "__main__":
     for x in range(15):
