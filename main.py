@@ -20,6 +20,12 @@ def main():
     new_content = new_content_response.text
     old_content = pickle.load(open('old_content.pkl', 'rb'))
 
+    # Print out the old and new content for debugging
+    print("New Content:")
+    print("=" * 80)
+    print(new_content)
+    print("=" * 80)
+
     if new_content == old_content:
         print("No change detected.")
 
